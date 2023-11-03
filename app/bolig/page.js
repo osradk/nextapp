@@ -1,6 +1,9 @@
+import Link from "next/link";
 
-import FetchDataFraClient from "./components/fetchDataFraClient.jsx"
-import { Suspense } from "react";
+
+export const metadata = {
+  title:"bloig siden"
+}
 
 const containerStyle ={
   
@@ -23,18 +26,17 @@ const BoligPage = async () => {
       }
 
     }
+    
     );
     const data = await response.json();
    
 
     return (
-      <article style={{display:"flex", gap:"20px ", justifyContent:"space-around", padding:"20px"}}>
-      <section  style={{border:"1px solid grey", padding:"20px"}}>
-      <h1 style={{ fontSize:"24px", fontWeight:"500"}}> Ftech data fra sever component </h1>
+  
       <div style={{paddingTop:"50px",display:"flex", gap:"50px", flexDirection:"column", justifyContent:"center", alignItems:"center"}}>
 
       {data.map((home, index) => (
-        
+      <Link href={`/bolig/${home.id}`}>
         <div key={index} style={containerStyle}>
         <div>
           <figure>
@@ -87,23 +89,16 @@ const BoligPage = async () => {
           </figure>
         </div>
       </div>
+      </Link>
         
       ))}
 
        
        
       </div>
-      </section>
-      <section  style={{border:"1px solid grey", padding:"20px"}}>
-      <h1 style={{ fontSize:"24px", fontWeight:"500"}}>Fetch datta fra client component</h1>
-
-  <Suspense>
-<FetchDataFraClient/>
-</Suspense>
-      </section>
-      </article>
+   
+     
     );
   }
 
 export default BoligPage;
-
